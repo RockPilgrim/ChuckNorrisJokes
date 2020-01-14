@@ -1,12 +1,12 @@
 package my.rockpilgrim.chucknorrisjokes.ui;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -53,7 +53,20 @@ public class JokesFragment extends MvpAppCompatFragment implements MvpJokesView 
         View root = inflater.inflate(R.layout.jokes_fragment, container, false);
         ButterKnife.bind(this, root);
         initRecycler(root);
+        setListeners();
         return root;
+    }
+
+    private void setListeners() {
+        countEditText.setOnKeyListener((v, keyCode, event) -> {
+            if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
+                    onClickReload();
+                    return true;
+                }
+            }
+            return false;
+        });
     }
 
     private void initRecycler(View root) {

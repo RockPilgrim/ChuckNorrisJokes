@@ -3,6 +3,7 @@ package my.rockpilgrim.chucknorrisjokes.presenter;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -27,7 +28,6 @@ public class JokesPresenter extends MvpPresenter<MvpJokesView> implements IJokes
 
     public void connectToServer(int jokesCount) {
         Disposable disposable = ServerConnector.request(jokesCount)
-//                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(jokePackage -> {
                     jokeList = jokePackage.getJokeList();
@@ -45,6 +45,7 @@ public class JokesPresenter extends MvpPresenter<MvpJokesView> implements IJokes
 
     @Override
     public String getJoke(int index) {
-        return jokeList.get(index).getJoke();
+        String joke = jokeList.get(index).getJoke().replace("&quot;", "\"");
+        return joke;
     }
 }

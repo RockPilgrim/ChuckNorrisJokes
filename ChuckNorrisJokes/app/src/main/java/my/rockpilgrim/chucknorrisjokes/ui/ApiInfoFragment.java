@@ -19,6 +19,8 @@ public class ApiInfoFragment extends MvpAppCompatFragment {
     @BindView(R.id.api_webView)
     public WebView webView;
 
+    private Bundle webViewBundle;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
